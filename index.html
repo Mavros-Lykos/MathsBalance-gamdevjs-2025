@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,118 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
+        <!-- Add this to index.html right after the opening <div class="container"> -->
+        <!-- Tutorial Screen -->
+        <div id="tutorial-screen" class="screen">
+            <div class="tutorial-container">
+                <div class="tutorial-header">
+                    <h2>Welcome to Math Balance</h2>
+                    <button id="skip-tutorial-btn" class="btn secondary-btn">Skip Tutorial</button>
+                </div>
+
+                <div class="tutorial-content">
+                    <!-- Tutorial slides will be displayed here -->
+                    <div class="tutorial-slide active" data-slide="1">
+                        <div class="tutorial-image">
+                            <i class="fas fa-balance-scale tutorial-icon"></i>
+                        </div>
+                        <h3>Balance in Mathematics</h3>
+                        <p>Math Balance teaches you how math helps create balance in real-world situations.</p>
+                        <p>Just like a scale needs equal weight on both sides, real problems need mathematical balance
+                            to be solved correctly.</p>
+                    </div>
+
+                    <div class="tutorial-slide" data-slide="2">
+                        <div class="tutorial-image">
+                            <i class="fas fa-calculator tutorial-icon"></i>
+                        </div>
+                        <h3>Real-World Applications</h3>
+                        <p>Discover how math creates balance in everyday situations:</p>
+                        <ul class="tutorial-list">
+                            <li><span class="emoji">💰</span> Balancing finances and transactions</li>
+                            <li><span class="emoji">🌱</span> Optimizing space for gardens and farming</li>
+                            <li><span class="emoji">🧪</span> Creating chemical balance in solutions</li>
+                            <li><span class="emoji">🏗️</span> Engineering structures with balanced forces</li>
+                        </ul>
+                    </div>
+
+                    <div class="tutorial-slide" data-slide="3">
+                        <div class="tutorial-image">
+                            <i class="fas fa-gamepad tutorial-icon"></i>
+                        </div>
+                        <h3>How to Play</h3>
+                        <p>In each level, you'll face math problems that need balancing:</p>
+                        <ul class="tutorial-list">
+                            <li><span class="emoji">⏱️</span> Solve problems before the timer runs out</li>
+                            <li><span class="emoji">💡</span> Use hints if you need help (but you'll earn more points
+                                without them)</li>
+                            <li><span class="emoji">✅</span> Enter your answer and submit to check if you've achieved
+                                balance</li>
+                        </ul>
+                    </div>
+
+                    <div class="tutorial-slide" data-slide="4">
+                        <div class="tutorial-image">
+                            <i class="fas fa-trophy tutorial-icon"></i>
+                        </div>
+                        <h3>Earn Badges & Improve</h3>
+                        <p>By playing Math Balance, you'll:</p>
+                        <div class="badges-preview">
+                            <div class="badge-preview">
+                                <i class="fas fa-bolt"></i>
+                                <span>Speedster</span>
+                            </div>
+                            <div class="badge-preview">
+                                <i class="fas fa-star"></i>
+                                <span>Perfect Score</span>
+                            </div>
+                            <div class="badge-preview">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Self-Reliant</span>
+                            </div>
+                            <div class="badge-preview">
+                                <i class="fas fa-brain"></i>
+                                <span>Math Whiz</span>
+                            </div>
+                        </div>
+                        <p>Sharpen your math skills while learning how balance applies to real life!</p>
+                    </div>
+
+                    <div class="tutorial-slide" data-slide="5">
+                        <div class="tutorial-image">
+                            <i class="fas fa-graduation-cap tutorial-icon"></i>
+                        </div>
+                        <h3>Why Balance Matters</h3>
+                        <p>Imbalance causes problems in the real world:</p>
+                        <ul class="tutorial-list">
+                            <li><span class="emoji">❌</span> Too little or too much can lead to waste</li>
+                            <li><span class="emoji">❌</span> Unbalanced forces can cause structural failure</li>
+                            <li><span class="emoji">❌</span> Imbalanced equations give incorrect results</li>
+                        </ul>
+                        <p>Learning to find balance through math helps us make better decisions!</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-navigation">
+                    <button id="prev-slide-btn" class="btn nav-btn disabled">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <div class="slide-indicators">
+                        <span class="slide-indicator active" data-slide="1"></span>
+                        <span class="slide-indicator" data-slide="2"></span>
+                        <span class="slide-indicator" data-slide="3"></span>
+                        <span class="slide-indicator" data-slide="4"></span>
+                        <span class="slide-indicator" data-slide="5"></span>
+                    </div>
+                    <button id="next-slide-btn" class="btn nav-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
         <!-- Home Screen -->
         <div id="home-screen" class="screen active">
             <h1>Math Balance</h1>
@@ -134,7 +245,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Audio elements -->
     <audio id="correct-sound" src="sounds/correct.mp3"></audio>
     <audio id="wrong-sound" src="sounds/wrong.wav"></audio>
@@ -145,4 +256,5 @@
     <script src="data.js"></script>
     <script src="game.js"></script>
 </body>
+
 </html>
