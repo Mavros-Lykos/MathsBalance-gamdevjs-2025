@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Balance Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen active">
+            <h1>Math Balance</h1>
+            <p>Learn to balance real-world math problems!</p>
+            <div class="button-container">
+                <button id="play-btn" class="btn primary-btn">Play Game</button>
+                <button id="scores-btn" class="btn secondary-btn">View Scores</button>
+            </div>
+        </div>
+
+        <!-- Level Selection Screen -->
+        <div id="level-screen" class="screen">
+            <h2>Select Difficulty</h2>
+            <div class="levels-container">
+                <div class="level-card" data-level="beginner">
+                    <h3>Beginner</h3>
+                    <p>Simple math problems for newcomers</p>
+                </div>
+                <div class="level-card" data-level="easy">
+                    <h3>Easy</h3>
+                    <p>A bit more challenging problems</p>
+                </div>
+                <div class="level-card" data-level="medium">
+                    <h3>Medium</h3>
+                    <p>Complex problems for experienced players</p>
+                </div>
+                <div class="level-card" data-level="worldHero">
+                    <h3>World Hero</h3>
+                    <p>Expert-level challenges</p>
+                </div>
+            </div>
+            <button id="back-from-level" class="btn secondary-btn">Back</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="progress-container">
+                    <span id="progress-text">Problem 1/10</span>
+                    <div class="progress-bar">
+                        <div id="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="timer-container">
+                    <i class="fas fa-clock"></i>
+                    <span id="timer">60</span>
+                </div>
+            </div>
+
+            <div class="problem-container">
+                <h3 id="problem-text">Loading problem...</h3>
+                <div class="problem-image-container">
+                    <img id="problem-image" src="placeholder.jpg" alt="Problem visualization">
+                </div>
+                <div class="hint-container">
+                    <button id="hint-btn" class="btn hint-btn">Show Hint</button>
+                    <div id="hint-text" class="hidden">
+                        <p>Hint: <span id="hint-content"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="answer-container">
+                <div class="input-group">
+                    <input type="text" id="answer-input" placeholder="Your answer">
+                    <span id="unit-display"></span>
+                </div>
+                <button id="submit-btn" class="btn primary-btn">Submit</button>
+            </div>
+
+            <div id="feedback" class="feedback hidden"></div>
+
+            <button id="back-from-game" class="btn secondary-btn">Quit Game</button>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <h2>Game Results</h2>
+            <div class="results-container">
+                <div class="achievement" id="level-achievement">
+                    <i class="fas fa-trophy"></i>
+                    <span>Completed Level: <span id="completed-level">Beginner</span></span>
+                </div>
+                <div class="score-breakdown">
+                    <p>Problems Solved: <span id="problems-solved">0/10</span></p>
+                    <p>Base Score: <span id="base-score">0</span></p>
+                    <p>Time Bonus: <span id="time-bonus">0</span></p>
+                    <p>No-Hint Bonus: <span id="hint-bonus">0</span></p>
+                    <p class="total-score">Total Score: <span id="total-score">0</span></p>
+                </div>
+                <div id="badge-container" class="badge-container">
+                    <!-- Badges will be added here -->
+                </div>
+            </div>
+            <div class="button-container">
+                <button id="play-again-btn" class="btn primary-btn">Play Again</button>
+                <button id="home-btn" class="btn secondary-btn">Back to Home</button>
+            </div>
+        </div>
+
+        <!-- Scores Screen -->
+        <div id="scores-screen" class="screen">
+            <h2>Score History</h2>
+            <div class="scores-container">
+                <table id="scores-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Level</th>
+                            <th>Completed</th>
+                            <th>Score</th>
+                            <th>Badges</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scores-body">
+                        <!-- Score rows will be added here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="button-container">
+                <button id="clear-scores-btn" class="btn danger-btn">Clear History</button>
+                <button id="back-from-scores" class="btn secondary-btn">Back</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Audio elements -->
+    <audio id="correct-sound" src="sounds/correct.mp3"></audio>
+    <audio id="wrong-sound" src="sounds/wrong.wav"></audio>
+    <audio id="level-complete-sound" src="sounds/level-complete.mp3"></audio>
+    <audio id="start-sound" src="sounds/start.wav"></audio>
+
+
+    <script src="data.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
