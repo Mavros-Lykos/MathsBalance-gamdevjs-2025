@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Math Balance Game</title>
+    <!-- MDB CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+
+    <div class="container my-5">
+        <!-- Tutorial Screen -->
+        <div id="tutorial-screen" class="d-none vh-100">
+            <!-- ...tutorial markup unchanged for now... -->
+        </div>
+
+        <!-- Home Screen -->
+        <div id="home-screen" class="text-center">
+            <h1 class="display-4 text-primary mb-3">Math Balance</h1>
+            <p class="lead mb-4">Learn to balance real‑world math problems!</p>
+            <div class="d-flex justify-content-center gap-3">
+                <button id="play-btn" class="btn btn-primary btn-lg">Play Game</button>
+                <button id="scores-btn" class="btn btn-outline-secondary btn-lg">View Scores</button>
+            </div>
+        </div>
+
+        <!-- Level Selection Screen -->
+        <div id="level-screen" class="d-none">
+            <h2 class="mb-4">Select Difficulty</h2>
+            <div class="row g-4 mb-4">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card hover-shadow" data-level="beginner">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Beginner</h5>
+                            <p class="card-text">Simple math problems for newcomers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card hover-shadow" data-level="easy">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Easy</h5>
+                            <p class="card-text">A bit more challenging problems</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card hover-shadow" data-level="medium">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Medium</h5>
+                            <p class="card-text">Complex problems for experienced players</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card hover-shadow" data-level="worldHero">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">World Hero</h5>
+                            <p class="card-text">Expert-level challenges</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="back-from-level" class="btn btn-outline-secondary">Back</button>
+        </div>
+    </div>
+    <!-- Game Screen -->
+    <div id="game-screen" class="d-none">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <div class="text-muted" id="progress-text">Problem 1/10</div>
+                <div class="progress" style="height: 8px;">
+                    <div id="progress-fill" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="d-flex align-items-center bg-light rounded-pill px-3 py-1">
+                <i class="fas fa-clock me-2 text-dark"></i>
+                <span id="timer">60</span>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h4 id="problem-text">Loading problem...</h4>
+            <div class="bg-light rounded-3 p-3 text-center mb-3">
+                <img id="problem-image" src="placeholder.jpg" alt="Problem visualization" class="img-fluid"
+                    style="max-height: 200px; object-fit: contain" />
+            </div>
+
+            <div class="text-end mb-2">
+                <button id="hint-btn" class="btn btn-info btn-sm text-white">
+                    Show Hint
+                </button>
+            </div>
+            <div id="hint-text"
+                class="d-none p-3 rounded bg-success bg-opacity-10 border-start border-success border-4 mb-3">
+                <strong>Hint:</strong> <span id="hint-content"></span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="answer-input" placeholder="Your answer" />
+                <span class="input-group-text" id="unit-display">kg</span>
+            </div>
+            <button id="submit-btn" class="btn btn-primary w-100">Submit</button>
+        </div>
+
+        <div id="feedback" class="d-none alert mt-3"></div>
+
+        <div class="text-center mt-4">
+            <button id="back-from-game" class="btn btn-outline-danger">Quit Game</button>
+        </div>
+    </div>
+    <!-- Results Screen -->
+    <div id="results-screen" class="d-none">
+        <h2 class="mb-4 text-center">Game Results</h2>
+        <div class="bg-light rounded p-4 shadow-sm mb-4">
+            <div class="d-flex align-items-center bg-warning bg-opacity-25 text-warning p-3 rounded mb-4">
+                <i class="fas fa-trophy fa-2x me-3"></i>
+                <div>Completed Level: <strong id="completed-level">Beginner</strong></div>
+            </div>
+
+            <ul class="list-group mb-4">
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Problems Solved:</span>
+                    <span id="problems-solved">0/10</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Base Score:</span>
+                    <span id="base-score">0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Time Bonus:</span>
+                    <span id="time-bonus">0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>No-Hint Bonus:</span>
+                    <span id="hint-bonus">0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-primary text-white fw-bold">
+                    <span>Total Score:</span>
+                    <span id="total-score">0</span>
+                </li>
+            </ul>
+
+            <div id="badge-container" class="d-flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3">
+            <button id="play-again-btn" class="btn btn-success">Play Again</button>
+            <button id="home-btn" class="btn btn-outline-secondary">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- MDB JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+    <script src="data.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>
