@@ -1,0 +1,209 @@
+/* Custom styles for Math Balance Game */
+
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.screen {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.screen.active {
+    display: block;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Tutorial Screen Styles */
+.tutorial-slide {
+    display: none;
+}
+
+.tutorial-slide.active {
+    display: block;
+}
+
+.tutorial-icon {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.slide-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.slide-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slide-indicator.active {
+    width: 14px;
+    height: 14px;
+    background-color: #1266f1;
+}
+
+/* Level Selection Screen Styles */
+.level-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.level-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Game Screen Styles */
+.hint-container {
+    margin: 20px 0;
+}
+
+.hint-btn {
+    transition: all 0.3s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+#feedback.alert-success {
+    background-color: rgba(0, 200, 81, 0.1);
+    border-color: #00c851;
+    color: #00c851;
+}
+
+#feedback.alert-danger {
+    background-color: rgba(255, 68, 68, 0.1);
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
+/* Results Screen Styles */
+.badge-container .achievement-badge {
+    transition: all 0.3s ease;
+}
+
+.badge-container .achievement-badge:hover {
+    transform: scale(1.05);
+}
+
+.ribbon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.ribbon-container::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tutorial-navigation {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .slide-indicators {
+        order: -1;
+        margin-bottom: 15px;
+    }
+}
+
+/* Animation for progress bar */
+@keyframes progress-fill {
+    from { width: 0%; }
+    to { width: var(--progress-width); }
+}
+
+#progress-fill {
+    animation: progress-fill 0.5s ease-out;
+}
+
+/* Timer alert states */
+.timer-warning {
+    background-color: #ffbb33 !important;
+    color: #000 !important;
+}
+
+.timer-danger {
+    background-color: #ff4444 !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Badge styles for the results screen */
+.achievement-badge {
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.achievement-badge.speedster {
+    background-color: rgba(0, 137, 255, 0.1);
+    color: #0089ff;
+}
+
+.achievement-badge.perfect {
+    background-color: rgba(0, 200, 81, 0.1);
+    color: #00c851;
+}
+
+.achievement-badge.self-reliant {
+    background-color: rgba(255, 187, 51, 0.1);
+    color: #ffbb33;
+}
+
+.achievement-badge.math-whiz {
+    background-color: rgba(156, 39, 176, 0.1);
+    color: #9c27b0;
+}
+
+/* Custom button styles */
+.btn-rounded {
+    border-radius: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 576px) {
+    .tutorial-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .timer-container {
+        margin-top: 10px;
+    }
+    
+    .problem-container h3 {
+        font-size: 1.2rem;
+    }
+}
