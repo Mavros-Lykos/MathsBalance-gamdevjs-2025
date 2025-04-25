@@ -7,7 +7,7 @@ let currentScreen = 'home-screen';
 let currentLevel = '';
 let currentProblems = [];
 let currentProblemIndex = 0;
-let totalProblems = 10;
+let totalProblems = 5;
 let timeLeft = 0;
 let timer = null;
 let score = {
@@ -26,6 +26,8 @@ const correctSound = document.getElementById('correct-sound');
 const wrongSound = document.getElementById('wrong-sound');
 const levelCompleteSound = document.getElementById('level-complete-sound');
 const startSound = document.getElementById('start-sound');
+const startGameSound = document.getElementById('start-Game');
+
 
 // Screen elements
 const screens = {
@@ -82,13 +84,17 @@ function init() {
     attachTutorialEventListeners();
     loadScores();
     addTutorialButtons();
-    
+
     // Show tutorial on first visit
     if (!hasSeenTutorial) {
         showScreen('tutorial-screen');
         showTutorialSlide(1);
     }
-}
+} // Wait for the window to fully load
+window.onload = function() {
+  // Play the audio when the page loads
+  document.getElementById('start-sound').play();
+};
 
 function addTutorialButtons() {
     // Add Tutorial button to home screen if it doesn't exist already
@@ -101,7 +107,7 @@ function addTutorialButtons() {
         tutorialBtn.addEventListener('click', () => showScreen('tutorial-screen'));
         homeButtonContainer.appendChild(tutorialBtn);
     }
-    
+
     // Add Tutorial link to level screen if it doesn't exist already
     if (!document.querySelector('.level-screen .tutorial-button')) {
         const levelScreen = document.getElementById('level-screen');
@@ -124,19 +130,19 @@ function showTutorialSlide(slideNumber) {
     document.querySelectorAll('.tutorial-slide').forEach(slide => {
         slide.classList.remove('active');
     });
-    
+
     // Show the requested slide
     document.querySelector(`.tutorial-slide[data-slide="${slideNumber}"]`).classList.add('active');
-    
+
     // Update indicators
     slideIndicators.forEach(indicator => {
         indicator.classList.remove('active');
     });
     document.querySelector(`.slide-indicator[data-slide="${slideNumber}"]`).classList.add('active');
-    
+
     // Update buttons
     prevSlideBtn.classList.toggle('disabled', slideNumber === 1);
-    
+
     if (slideNumber === totalTutorialSlides) {
         nextSlideBtn.textContent = 'Start Game';
         nextSlideBtn.innerHTML = 'Start Game <i class="fas fa-play"></i>';
@@ -144,7 +150,7 @@ function showTutorialSlide(slideNumber) {
         nextSlideBtn.textContent = 'Next';
         nextSlideBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
     }
-    
+
     // Update current slide
     currentTutorialSlide = slideNumber;
 }
@@ -167,7 +173,7 @@ function completeTutorial() {
     // Mark tutorial as seen
     localStorage.setItem('mathBalanceSeenTutorial', 'true');
     hasSeenTutorial = true;
-    
+
     // Go to level selection
     showScreen('level-screen');
 }
@@ -176,7 +182,7 @@ function attachTutorialEventListeners() {
     skipTutorialBtn.addEventListener('click', completeTutorial);
     prevSlideBtn.addEventListener('click', prevTutorialSlide);
     nextSlideBtn.addEventListener('click', nextTutorialSlide);
-    
+
     // Add click events to indicators
     slideIndicators.forEach(indicator => {
         indicator.addEventListener('click', () => {
@@ -202,7 +208,7 @@ function attachEventListeners() {
     playAgainBtn.addEventListener('click', () => showScreen('level-screen'));
     homeBtn.addEventListener('click', () => showScreen('home-screen'));
     clearScoresBtn.addEventListener('click', clearScores);
-    
+
     // Level selection
     levelCards.forEach(card => {
         card.addEventListener('click', () => {
@@ -210,7 +216,7 @@ function attachEventListeners() {
             startGame(currentLevel);
         });
     });
-    
+
     // Game controls
     submitBtn.addEventListener('click', checkAnswer);
     hintBtn.addEventListener('click', showHint);
@@ -227,26 +233,38 @@ function showScreen(screenId) {
     if (screenId === 'tutorial-screen') {
         showTutorialSlide(1);
     }
-    
+
     // Hide all screens
     Object.values(screens).forEach(screen => {
         if (screen) {
             screen.classList.remove('active');
         }
     });
-    
+
     // Show the requested screen
     document.getElementById(screenId).classList.add('active');
     currentScreen = screenId;
-    
+
     // Play start sound for game screen
-    if (screenId === 'game-screen') {
+     if (screenId === 'game-screen') {
+        startGameSound.play();
+    } 
+    if (screenId === 'home-screen') {
         startSound.play();
+    }
+}
+// Shuffle problems
+function shuffleProblems() {
+    for (let i = currentProblems.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [currentProblems[i], currentProblems[j]] = [currentProblems[j], currentProblems[i]]; // Swap
     }
 }
 
 // Start a new game
 function startGame(level) {
+    startSound.pause();
+
     // Set up game variables based on level
     currentLevel = level;
     currentProblemIndex = 0;
@@ -254,48 +272,55 @@ function startGame(level) {
     usedHints = 0;
     score = { base: 0, timeBonus: 0, hintBonus: 0, total: 0 };
     earnedBadges = [];
-    
+
     // Get problems for the selected level
     currentProblems = [...problems[level]];
-    
+
+    //shuffle problems
+    shuffleProblems();
+
+    // Ensure that the total number of problems is exactly what you want
+    currentProblems = currentProblems.slice(0, totalProblems);  // Take only 'totalProblems' number of problems
+
     // Set time limit based on difficulty
     switch (level) {
-        case 'beginner': 
-            timeLeft = 60; 
+        case 'beginner':
+            timeLeft = 90;
             break;
-        case 'easy': 
-            timeLeft = 90; 
+        case 'easy':
+            timeLeft = 120;
             break;
-        case 'medium': 
-            timeLeft = 120; 
+        case 'medium':
+            timeLeft = 180;
             break;
-        case 'worldHero': 
-            timeLeft = 180; 
+        case 'worldHero':
+            timeLeft = 240;
             break;
     }
-    
+
     // Show the game screen
     showScreen('game-screen');
-    
+
     // Load the first problem
     loadProblem();
-    
+
     // Start the timer
     startTimer();
 }
 
 // Load a problem
 function loadProblem() {
-    if (currentProblemIndex < currentProblems.length) {
+    if (currentProblemIndex < totalProblems) {
+
         const problem = currentProblems[currentProblemIndex];
-        
+
         // Reset problem state
         usedHintInCurrentProblem = false;
         feedback.classList.add('hidden');
         hintText.classList.add('hidden');
-        hintBtn.textContent = 'Show Hint';
-        hintBtn.innerHTML = '<i class="far fa-lightbulb me-2"></i> Show Hint';
-        
+        hintBtn.textContent = 'Show';
+        hintBtn.innerHTML = '<i class="far fa-lightbulb me-2"></i> Show';
+
         // Update UI
         problemText.textContent = problem.question;
         problemImage.src = problem.image;
@@ -303,11 +328,10 @@ function loadProblem() {
         unitDisplay.textContent = problem.unit;
         answerInput.value = '';
         answerInput.focus();
-        
+
         // Update progress
-        const problemsToShow = Math.min(totalProblems, currentProblems.length);
-        progressText.textContent = `Problem ${currentProblemIndex + 1}/${problemsToShow}`;
-        progressFill.style.width = `${((currentProblemIndex + 1) / problemsToShow) * 100}%`;
+        progressText.textContent = `Problem ${currentProblemIndex + 1}/${totalProblems}`;
+        progressFill.style.width = `${((currentProblemIndex + 1) / totalProblems) * 100}%`;
     } else {
         // End the game if we've gone through all problems
         endGame();
@@ -318,15 +342,15 @@ function loadProblem() {
 function startTimer() {
     // Clear any existing timer
     stopTimer();
-    
+
     // Update timer display
     timerElement.textContent = timeLeft;
-    
+
     // Start a new timer
     timer = setInterval(() => {
         timeLeft--;
         timerElement.textContent = timeLeft;
-        
+
         // End game if time runs out
         if (timeLeft <= 0) {
             stopTimer();
@@ -347,17 +371,17 @@ function stopTimer() {
 // Show hint
 function showHint() {
     hintText.classList.toggle('hidden');
-    
+
     if (!hintText.classList.contains('hidden')) {
-        hintBtn.textContent = 'Hide Hint';
-        hintBtn.innerHTML = '<i class="far fa-lightbulb me-2"></i> Hide Hint';
+        hintBtn.textContent = 'Hide';
+        hintBtn.innerHTML = '<i class="far fa-lightbulb me-2"></i> Hide';
         if (!usedHintInCurrentProblem) {
             usedHintInCurrentProblem = true;
             usedHints++;
         }
     } else {
-        hintBtn.textContent = 'Show Hint';
-        hintBtn.innerHTML = '<i class="far fa-lightbulb me-2"></i> Show Hint';
+        hintBtn.textContent = 'Show';
+        hintBtn.innerHTML = '<i class="far fa-lightbulb me-2"></i> Show';
     }
 }
 
@@ -365,26 +389,33 @@ function showHint() {
 function checkAnswer() {
     const userAnswer = parseFloat(answerInput.value);
     const currentProblem = currentProblems[currentProblemIndex];
-    
+
     // Check if the answer is empty or not a number
-    if (answerInput.value.trim() === '' || isNaN(userAnswer)) {
-        showFeedback('Please enter a valid number.', false);
-        return;
-    }
-    
+    /*  if (answerInput.value.trim() === '' || isNaN(userAnswer)) {
+         showFeedback('Please enter a valid number.', false);
+         return;
+     } */
+    answerInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // prevents form or default action
+            checkAnswer(); // this will only progress if correct
+        }
+    });
+
+
     // Check if the answer is correct (with some tolerance for floating point)
     const isCorrect = Math.abs(userAnswer - currentProblem.answer) < 0.01;
-    
+
     if (isCorrect) {
         // Play correct sound
         correctSound.play();
-        
+
         // Show feedback
         showFeedback(`Correct! ${currentProblem.explanation}`, true);
-        
+
         // Update score
         correctAnswers++;
-        
+
         // Calculate base points based on difficulty
         let basePoints;
         switch (currentLevel) {
@@ -394,29 +425,29 @@ function checkAnswer() {
             case 'worldHero': basePoints = 50; break;
             default: basePoints = 10;
         }
-        
+
         // Add points to base score
         score.base += basePoints;
-        
+
         // Add no-hint bonus if applicable
         if (!usedHintInCurrentProblem) {
             score.hintBonus += 5;
         }
-        
+
         // Check for speed badge
         if (getLevelMaxTime(currentLevel) - timeLeft < 15) {
             addBadge('speedster');
         }
-        
+
         // Move to the next problem after a delay
         setTimeout(() => {
             currentProblemIndex++;
             loadProblem();
-        }, 2000);
+        }, 1000);
     } else {
         // Play wrong sound
         wrongSound.play();
-        
+
         // Show feedback
         showFeedback('Not quite right. Try again!', false);
     }
@@ -426,10 +457,12 @@ function checkAnswer() {
 function showFeedback(message, isCorrect) {
     feedback.textContent = message;
     feedback.classList.remove('hidden', 'correct', 'incorrect');
-    
+
     if (isCorrect === true) {
+        feedback.classList.remove('alert-danger');
         feedback.classList.add('correct', 'alert-success');
     } else if (isCorrect === false) {
+        feedback.classList.remove('alert-success');
         feedback.classList.add('incorrect', 'alert-danger');
     }
 }
@@ -458,27 +491,27 @@ function endGame() {
 // Calculate the final score with new time bonus rules
 function calculateFinalScore() {
     // Base score already accumulated during gameplay
-    
+
     // Calculate time bonus with new rules
     const maxTime = getLevelMaxTime(currentLevel);
     const timeRemaining = timeLeft; // Time left when game ended
-    
+
     // Calculate what fraction of max time is remaining
     const timeRemainingFraction = timeRemaining / maxTime;
-    
+
     // Apply the new time bonus rules
     if (timeRemainingFraction >= 0.5) { // More than half time remaining
         score.timeBonus = 50;
-    } else if (timeRemainingFraction >= 1/3) { // More than 1/3 time remaining
+    } else if (timeRemainingFraction >= 1 / 3) { // More than 1/3 time remaining
         score.timeBonus = 30;
-    } else if (timeRemainingFraction >= 1/4) { // More than 1/4 time remaining
+    } else if (timeRemainingFraction >= 1 / 4) { // More than 1/4 time remaining
         score.timeBonus = 20;
-    } else if (timeRemainingFraction >= 1/5) { // More than 1/5 time remaining
+    } else if (timeRemainingFraction >= 1 / 5) { // More than 1/5 time remaining
         score.timeBonus = 10;
     } else {
         score.timeBonus = 0;
     }
-    
+
     // Calculate total score
     score.total = score.base + score.timeBonus + score.hintBonus;
 }
@@ -489,22 +522,22 @@ function assignBadges() {
     if (correctAnswers === currentProblems.length) {
         addBadge('perfectScore');
     }
-    
+
     // No hints badge
     if (usedHints === 0) {
         addBadge('noHints');
     }
-    
+
     // Math Whiz badge (completed World Hero level)
     if (currentLevel === 'worldHero' && correctAnswers > 0) {
         addBadge('mathWhiz');
     }
-    
+
     // Balance Master badge (perfect score on World Hero level)
     if (correctAnswers === currentProblems.length && currentLevel === 'worldHero') {
         addBadge('balanceMaster');
     }
-    
+
     // Speed Master badge is already added during gameplay for individual problems
 }
 
@@ -520,16 +553,16 @@ function updateResultsScreen() {
         default: levelName = 'Unknown';
     }
     completedLevel.textContent = levelName;
-    
+
     // Update problems solved
-    problemsSolved.textContent = `${correctAnswers}/${currentProblems.length}`;
-    
+    problemsSolved.textContent = `${totalProblems}/${totalProblems}`;
+
     // Update score breakdown
     baseScore.textContent = score.base;
     timeBonus.textContent = score.timeBonus;
     hintBonus.textContent = score.hintBonus;
     totalScore.textContent = score.total;
-    
+
     // Update badges
     badgeContainer.innerHTML = '';
     earnedBadges.forEach(badgeId => {
@@ -557,10 +590,10 @@ function addBadge(badgeId) {
 // Get the maximum time for a level
 function getLevelMaxTime(level) {
     switch (level) {
-        case 'beginner': return 60;
-        case 'easy': return 90;
-        case 'medium': return 120;
-        case 'worldHero': return 180;
+        case 'beginner': return 90;
+        case 'easy': return 120;
+        case 'medium': return 180;
+        case 'worldHero': return 240;
         default: return 60;
     }
 }
@@ -584,18 +617,18 @@ function saveScore() {
 function loadScores() {
     const scores = JSON.parse(localStorage.getItem('mathBalanceScores')) || [];
     const scoresBody = document.getElementById('scores-body');
-    
+
     // Clear existing scores
     scoresBody.innerHTML = '';
-    
+
     // Add scores to table
     scores.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(score => {
         const row = document.createElement('tr');
-        
+
         // Format date
         const date = new Date(score.date);
         const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-        
+
         // Get level name
         let levelName;
         switch (score.level) {
@@ -605,7 +638,7 @@ function loadScores() {
             case 'worldHero': levelName = 'World Hero'; break;
             default: levelName = 'Unknown';
         }
-        
+
         // Create badge HTML
         const badgeHTML = (score.badges || []).map(b => {
             const badge = badges[b];
@@ -616,7 +649,7 @@ function loadScores() {
             }
             return '';
         }).join('');
-        
+
         row.innerHTML = `
             <td>${formattedDate}</td>
             <td>${levelName}</td>
@@ -624,10 +657,10 @@ function loadScores() {
             <td>${score.score}</td>
             <td>${badgeHTML}</td>
         `;
-        
+
         scoresBody.appendChild(row);
     });
-    
+
     // Show message if no scores
     if (scores.length === 0) {
         const row = document.createElement('tr');
