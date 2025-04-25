@@ -14,7 +14,7 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-    <div class="container py-5">
+    <div class="container">
         <!-- Tutorial Screen -->
         <div id="tutorial-screen" class="screen card shadow-lg border-0 rounded-lg overflow-hidden">
             <div class="tutorial-container p-0">
@@ -160,7 +160,7 @@
         </div>
 
         <!-- Home Screen -->
-        <div id="home-screen" class="screen active">
+        <div id="home-screen" class="screen active my-5">
             <div class="card shadow-lg border-0 rounded-lg text-center">
                 <div class="card-header bg-primary text-white p-4">
                     <h1 class="display-4 fw-bold">Math Balance</h1>
@@ -202,8 +202,8 @@
                                     <h3 class="h5 card-title">Beginner</h3>
                                     <p class="card-text">Simple math problems for newcomers</p>
                                 </div>
-                                <div class="card-footer bg-primary text-white p-2 text-center">
-                                    <small>LEVEL 1</small>
+                                <div class="card-footer bg-primary text-white p-0  text-center">
+                                    <small class="align-content-center ">LEVEL 1</small>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +263,7 @@
         <div id="game-screen" class="screen">
             <div class="card shadow-lg border-0 rounded-lg">
                 <div class="card-header bg-primary text-white p-3">
-                    <div class="row align-items-center">
+                    <div class="row align-items-between">
                         <div class="col-8">
                             <div class="progress-container">
                                 <span id="progress-text" class="mb-1 d-block">Problem 1/10</span>
@@ -273,9 +273,14 @@
                             </div>
                         </div>
                         <div class="col-4 text-end">
-                            <div class="timer-container bg-white bg-opacity-25 rounded-pill px-3 py-1 d-inline-flex align-items-center">
-                                <i class="fas fa-stopwatch me-2"></i>
-                                <span id="timer" class="fw-bold">60</span>
+                            <div class="d-inline-flex align-items-center justify-content-end gap-2">
+                                <button id="hint-btn" class="btn btn-light btn-rounded">
+                                    <i class="far fa-lightbulb me-2"></i>Show
+                                </button>
+                                <div class="timer-container bg-white bg-opacity-25 rounded-pill px-3 py-1 d-inline-flex align-items-center">
+                                    <i class="fas fa-stopwatch me-2"></i>
+                                    <span id="timer" class="fw-bold">60</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -284,16 +289,14 @@
                 <div class="card-body p-4">
                     <div class="problem-container text-center mb-4">
                         <div class="mb-3">
-                            <span class="badge bg-info text-dark rounded-pill px-3 py-2 mb-2">Challenge</span>
+                            <!-- <span class="badge bg-info text-dark rounded-pill px-3 py-2 mb-2">Challenge</span> -->
                             <h3 id="problem-text" class="h4 mb-0">Loading problem...</h3>
                         </div>
                         <div class="problem-image-container mb-4">
-                            <img id="problem-image" src="placeholder.jpg" alt="Problem visualization" class="img-fluid rounded shadow-sm">
+                            <img id="problem-image" src="placeholder.jpg" alt="Problem visualization" class="img-fluid rounded shadow-sm" style="max-height: 400px;">
                         </div>
                         <div class="hint-container">
-                            <button id="hint-btn" class="btn btn-outline-warning btn-rounded">
-                                <i class="far fa-lightbulb me-2"></i> Show Hint
-                            </button>
+                           
                             <div id="hint-text" class="alert alert-warning mt-3 hidden">
                                 <p class="mb-0"><strong>Hint:</strong> <span id="hint-content"></span></p>
                             </div>
@@ -432,6 +435,9 @@
     <audio id="wrong-sound" src="sounds/wrong.wav"></audio>
     <audio id="level-complete-sound" src="sounds/level-complete.mp3"></audio>
     <audio id="start-sound" src="sounds/start.wav"></audio>
+    <audio id="start-Game" src="sounds/startGame.wav"></audio>
+
+    
 
     <!-- Toast notifications -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
@@ -452,5 +458,7 @@
     <!-- Game data and scripts -->
     <script src="data.js"></script>
     <script src="game.js"></script>
+
+
 </body>
 </html>

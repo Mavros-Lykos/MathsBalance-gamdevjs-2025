@@ -4,7 +4,7 @@ const problems = {
     beginner: [
         {
             question: "You bought apples for $5. To balance your purchase, how much money should you give to the cashier?",
-            image: "https://via.placeholder.com/400x200?text=Apple+Purchase",
+            image: "MathsBalance1/beginner/1_apple.jpg",
             hint: "Balance equation: Money spent = Money given",
             answer: 5,
             unit: "$",
@@ -12,7 +12,7 @@ const problems = {
         },
         {
             question: "Your rectangular garden is 5m by 3m. How many square meters of soil do you need to cover it to create a balanced planting surface?",
-            image: "https://via.placeholder.com/400x200?text=Rectangle+Garden",
+            image: "MathsBalance1/beginner/2_square_meter.jpg",
             hint: "Balance equation: Area = Length × Width",
             answer: 15,
             unit: "m²",
@@ -20,14 +20,14 @@ const problems = {
         },
         {
             question: "Your $20 shirt is on sale with 25% off. To balance what you get with what you pay, how much will you pay?",
-            image: "https://via.placeholder.com/400x200?text=Shirt+Discount",
+            image: "MathsBalance1/beginner/3_shirt.jpg",
             hint: "Balance equation: Original price × (1 - discount percentage) = Final price",
             answer: 15,
             unit: "$",
             explanation: "To balance the transaction, you pay $20 × (1 - 0.25) = $20 × 0.75 = $15."
         },{
             question: "You bought a book for $12. To balance your purchase, how much money should you give to the cashier?",
-            image: "book_store.jpg",
+            image: "MathsBalance1/beginner/book_store.jpg",
             hint: "Balance equation: Money spent = Money given",
             answer: 12,
             unit: "$",
@@ -35,7 +35,7 @@ const problems = {
         },
         {
             question: "Your piggy bank has $15. After buying a toy for $8, how much money will remain to keep your savings balanced?",
-            image: "piggy_bank.jpg",
+            image: "MathsBalance1/beginner/piggy_bank.jpg",
             hint: "Balance equation: Initial money - Money spent = Remaining money",
             answer: 7,
             unit: "$",
@@ -43,7 +43,7 @@ const problems = {
         },
         {
             question: "A seesaw has a 30kg child on one end. How many kilograms should be placed on the other end for perfect balance?",
-            image: "seesaw.jpg",
+            image: "MathsBalance1/beginner/seesaw.jpg",
             hint: "Balance equation: Weight on left = Weight on right",
             answer: 30,
             unit: "kg",
@@ -51,7 +51,7 @@ const problems = {
         },
         {
             question: "You need to share 24 candies equally among 8 friends. How many candies should each friend get for a fair balance?",
-            image: "candies.jpg",
+            image: "MathsBalance1/beginner/candies.jpg",
             hint: "Balance equation: Total candies ÷ Number of friends = Candies per friend",
             answer: 3,
             unit: "candies",
@@ -59,7 +59,7 @@ const problems = {
         },
         {
             question: "A recipe needs 2 cups of flour for 1 loaf of bread. How many cups do you need for 3 loaves to maintain the proper balance?",
-            image: "baking.jpg",
+            image: "MathsBalance1/beginner/baking.jpg",
             hint: "Balance equation: Cups per loaf × Number of loaves = Total cups needed",
             answer: 6,
             unit: "cups",
@@ -67,7 +67,7 @@ const problems = {
         },
         {
             question: "If your daily water intake should be 2 liters, how many 250ml bottles must you drink for a balanced hydration?",
-            image: "water_bottles.jpg",
+            image: "MathsBalance1/beginner/water_bottles.jpg",
             hint: "Balance equation: Total needed ÷ Size of bottle = Number of bottles",
             answer: 8,
             unit: "bottles",
@@ -75,7 +75,7 @@ const problems = {
         },
         {
             question: "You've been running for 15 minutes. If your balanced exercise routine requires 45 minutes, how many more minutes should you run?",
-            image: "running.jpg",
+            image: "MathsBalance1/beginner/running.jpg",
             hint: "Balance equation: Total needed - Time completed = Time remaining",
             answer: 30,
             unit: "minutes",
@@ -83,7 +83,7 @@ const problems = {
         },
         {
             question: "A balanced meal needs 25% protein. If your plate has 400 grams of food, how many grams should be protein?",
-            image: "balanced_meal.jpg",
+            image: "MathsBalance1/beginner/balanced_meal.jpg",
             hint: "Balance equation: Total food × Protein percentage = Protein amount",
             answer: 100,
             unit: "grams",
@@ -91,7 +91,7 @@ const problems = {
         },
         {
             question: "If a car travels 12 km per liter of fuel, how many liters are needed to balance a 60 km journey?",
-            image: "car_journey.jpg",
+            image: "MathsBalance1/beginner/car_journey.jpg",
             hint: "Balance equation: Distance ÷ Efficiency = Fuel needed",
             answer: 5,
             unit: "liters",
@@ -99,7 +99,7 @@ const problems = {
         },
         {
             question: "A scale has 300 grams on the left side. How many grams should be placed on the right side to balance it?",
-            image: "scale.jpg",
+            image: "MathsBalance1/beginner/scale.jpg",
             hint: "Balance equation: Weight on left = Weight on right",
             answer: 300,
             unit: "grams",
@@ -107,7 +107,7 @@ const problems = {
         },
         {
             question: "Your weekly allowance is $20. If you spend $8 on Monday and $5 on Tuesday, how much remains to maintain balanced spending?",
-            image: "allowance.jpg",
+            image: "MathsBalance1/beginner/allowance.jpg",
             hint: "Balance equation: Starting amount - Spent amount = Remaining amount",
             answer: 7,
             unit: "$",
@@ -115,7 +115,7 @@ const problems = {
         },
         {
             question: "An aquarium has a pH of 6.8 but needs 7.0 for balanced water. If each neutralizer tablet raises pH by 0.1, how many tablets are needed?",
-            image: "aquarium.jpg",
+            image: "MathsBalance1/beginner/aquarium.jpg",
             hint: "Balance equation: (Target pH - Current pH) ÷ Effect per tablet = Tablets needed",
             answer: 2,
             unit: "tablets",
@@ -123,7 +123,7 @@ const problems = {
         },
         {
             question: "A recipe calls for a 2:1 ratio of flour to sugar. If you use 3 cups of sugar, how many cups of flour do you need for balance?",
-            image: "baking_ingredients.jpg",
+            image: "MathsBalance1/beginner/baking_ingredients.jpg",
             hint: "Balance equation: Sugar amount × Ratio = Flour amount",
             answer: 6,
             unit: "cups",
@@ -131,7 +131,7 @@ const problems = {
         },
         {
             question: "To maintain balance in your sleep cycle, you need 8 hours of sleep. If you went to bed at 10 PM, when should you wake up?",
-            image: "sleep_cycle.jpg",
+            image: "MathsBalance1/beginner/sleep_cycle.jpg",
             hint: "Balance equation: Start time + Sleep duration = Wake time",
             answer: 6,
             unit: "AM",
@@ -139,7 +139,7 @@ const problems = {
         },
         {
             question: "A balanced garden needs 1 plant per 0.5 square meters. How many plants do you need for a 5 square meter garden?",
-            image: "garden.jpg",
+            image: "MathsBalance1/beginner/garden.jpg",
             hint: "Balance equation: Area ÷ Area per plant = Number of plants",
             answer: 10,
             unit: "plants",
@@ -151,7 +151,7 @@ const problems = {
     easy: [
         {
             question: "You have $50 and spend $12.75 on lunch and $8.50 on a movie ticket. To balance your spending, how much money should you have left?",
-            image: "https://via.placeholder.com/400x200?text=Money+Balance",
+            image: "MathsBalance1/easy/1_balance_after lunch_and_movie_ticket .jpg",
             hint: "Balance equation: Initial amount - (Lunch + Movie) = Remaining",
             answer: 28.75,
             unit: "$",
@@ -159,7 +159,7 @@ const problems = {
         },
         {
             question: "Your backyard is a 10m by 8m rectangle. How many meters of fencing do you need to create a balanced boundary around it?",
-            image: "https://via.placeholder.com/400x200?text=Backyard+Fencing",
+            image: "MathsBalance1/easy/2_fence.jpg",
             hint: "Balance equation: Perimeter = 2 × (Length + Width)",
             answer: 36,
             unit: "m",
@@ -167,7 +167,7 @@ const problems = {
         },
         {
             question: "After a 30% discount and then an additional 15% off, what is the final balanced price of a $80 jacket?",
-            image: "https://via.placeholder.com/400x200?text=Compound+Discount",
+            image: "MathsBalance1/easy/3_jacket.jpg",
             hint: "Balance equation: Original × (1 - first discount) × (1 - second discount) = Final",
             answer: 47.6,
             unit: "$",
@@ -175,7 +175,7 @@ const problems = {
         },
         {
             question: "A seesaw has a 40kg child sitting 2m from the fulcrum. How far from the fulcrum should a 20kg child sit on the opposite side to balance?",
-            image: "seesaw_balance.jpg",
+            image: "MathsBalance1/easy/seesaw_balance.jpg",
             hint: "Balance equation: Weight₁ × Distance₁ = Weight₂ × Distance₂",
             answer: 4,
             unit: "m",
@@ -183,7 +183,7 @@ const problems = {
         },
         {
             question: "You have a monthly budget of $1200. If you've spent $450 on rent, $280 on groceries, and $170 on utilities, how much remains to maintain balanced finances?",
-            image: "budget.jpg",
+            image: "MathsBalance1/easy/budget.jpg",
             hint: "Balance equation: Total budget - All expenses = Remaining balance",
             answer: 300,
             unit: "$",
@@ -191,7 +191,7 @@ const problems = {
         },
         {
             question: "A chemical reaction requires a 3:2:1 ratio of elements A, B, and C. If you have 18g of A and 12g of B, how many grams of C are needed for balance?",
-            image: "chemistry.jpg",
+            image: "MathsBalance1/easy/chemistry.jpg",
             hint: "Balance equation: Compare with ratio - Element C = Element A ÷ 3",
             answer: 6,
             unit: "g",
@@ -199,7 +199,7 @@ const problems = {
         },
         {
             question: "Your car gets 35 miles per gallon. For a 420-mile round trip, how many gallons of fuel do you need for balanced planning?",
-            image: "road_trip.jpg",
+            image: "MathsBalance1/easy/road_trip.jpg",
             hint: "Balance equation: Total distance ÷ Fuel efficiency = Fuel needed",
             answer: 12,
             unit: "gallons",
@@ -207,7 +207,7 @@ const problems = {
         },
         {
             question: "A balanced diet requires 2000 calories daily. If breakfast is 500 calories and dinner is 700 calories, how many calories should lunch be?",
-            image: "balanced_diet.jpg",
+            image: "MathsBalance1/easy/balanced_diet.jpg",
             hint: "Balance equation: Total needed - (Breakfast + Dinner) = Lunch",
             answer: 800,
             unit: "calories",
@@ -215,7 +215,7 @@ const problems = {
         },
         {
             question: "In a balanced chemical equation 2H₂ + O₂ → 2H₂O, if you use 10g of H₂, how many grams of O₂ are needed for complete reaction?",
-            image: "chemical_reaction.jpg",
+            image: "MathsBalance1/easy/chemical_reaction.jpg",
             hint: "Balance equation: O₂ mass = H₂ mass × (O₂ molar mass / 2 × H₂ molar mass)",
             answer: 80,
             unit: "g",
@@ -223,7 +223,7 @@ const problems = {
         },
         {
             question: "A pulley system is balanced when forces on both sides are equal. If one side has 25kg, what weight is needed on the other side for equilibrium?",
-            image: "pulley.jpg",
+            image: "MathsBalance1/easy/pulley.jpg",
             hint: "Balance equation: Force on side 1 = Force on side 2",
             answer: 25,
             unit: "kg",
@@ -231,7 +231,7 @@ const problems = {
         },
         {
             question: "Your bank account has $350. After depositing your $1250 paycheck and paying $800 in bills, what's your new balance?",
-            image: "banking.jpg",
+            image: "MathsBalance1/easy/banking.jpg",
             hint: "Balance equation: Starting balance + Deposits - Withdrawals = New balance",
             answer: 800,
             unit: "$",
@@ -239,7 +239,7 @@ const problems = {
         },
         {
             question: "A recipe needs to balance wet and dry ingredients in a 1:2 ratio. If you have 150ml of wet ingredients, how many ml of dry ingredients do you need?",
-            image: "baking_ratio.jpg",
+            image: "MathsBalance1/easy/baking_ratio.jpg",
             hint: "Balance equation: Wet ingredients × Ratio = Dry ingredients",
             answer: 300,
             unit: "ml",
@@ -247,7 +247,7 @@ const problems = {
         },
         {
             question: "For a balanced workout, you should burn 300 calories. If you burn 8 calories per minute, how long should you exercise?",
-            image: "workout.jpg",
+            image: "MathsBalance1/easy/workout.jpg",
             hint: "Balance equation: Total calories ÷ Calories per minute = Exercise time",
             answer: 37.5,
             unit: "minutes",
@@ -255,7 +255,7 @@ const problems = {
         },
         {
             question: "A room is 20°C but needs to be heated to 24°C for comfort. If your heater increases temperature by 2°C per hour, how many hours until balanced temperature?",
-            image: "room_heating.jpg",
+            image: "MathsBalance1/easy/room_heating.jpg",
             hint: "Balance equation: (Target temp - Current temp) ÷ Heating rate = Time",
             answer: 2,
             unit: "hours",
@@ -263,7 +263,7 @@ const problems = {
         },
         {
             question: "A triangle has angles of 45° and 60°. What should the third angle be to maintain balanced geometry?",
-            image: "triangle.jpg",
+            image: "MathsBalance1/easy/triangle.jpg",
             hint: "Balance equation: 180° - Sum of known angles = Third angle",
             answer: 75,
             unit: "degrees",
@@ -271,7 +271,7 @@ const problems = {
         },
         {
             question: "Your garden needs water balance of 1 inch per week. If it rains 0.4 inches, how many more inches should you water?",
-            image: "garden_watering.jpg",
+            image: "MathsBalance1/easy/garden_watering.jpg",
             hint: "Balance equation: Total needed - Already received = Amount to add",
             answer: 0.6,
             unit: "inches",
@@ -279,7 +279,7 @@ const problems = {
         },
         {
             question: "A solution is 25% salt. How many grams of pure water must be added to 200g of this solution to create a balanced 10% solution?",
-            image: "solution_dilution.jpg",
+            image: "MathsBalance1/easy/solution_dilution.jpg",
             hint: "Balance equation: (Initial concentration × Initial mass) ÷ Target concentration - Initial mass = Water to add",
             answer: 300,
             unit: "g",
@@ -287,7 +287,7 @@ const problems = {
         },
         {
             question: "In a balanced ecosystem, each fox needs 5 rabbits to survive. If a forest has 12 foxes, how many rabbits are needed for ecosystem balance?",
-            image: "ecosystem.jpg",
+            image: "MathsBalance1/easy/ecosystem.jpg",
             hint: "Balance equation: Number of predators × Prey needed per predator = Total prey needed",
             answer: 60,
             unit: "rabbits",
