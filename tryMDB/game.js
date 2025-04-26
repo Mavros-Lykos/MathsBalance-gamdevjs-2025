@@ -108,11 +108,11 @@ function addTutorialButtons() {
         if (!levelScreen.querySelector('.level-info')) {
             const levelInfo = document.createElement('div');
             levelInfo.className = 'level-info mt-3';
-            const tutorialLink = document.createElement('button');
+            /* const tutorialLink = document.createElement('button');
             tutorialLink.className = 'tutorial-button btn btn-outline-primary btn-sm btn-rounded';
             tutorialLink.textContent = "View Tutorial";
             tutorialLink.addEventListener('click', () => showScreen('tutorial-screen'));
-            levelInfo.appendChild(tutorialLink);
+            levelInfo.appendChild(tutorialLink); */
             levelScreen.querySelector('.card-footer').prepend(levelInfo);
         }
     }

@@ -169,12 +169,12 @@ function addTutorialButtons() {
     const levelScreen = document.getElementById('level-screen');
     const levelInfo = document.createElement('div');
     levelInfo.className = 'level-info';
-    const tutorialLink = document.createElement('button');
+   /*  const tutorialLink = document.getElementById('tuto-button');
     tutorialLink.className = 'tutorial-button';
     tutorialLink.textContent = "View Tutorial";
     tutorialLink.addEventListener('click', () => showScreen('tutorial-screen'));
     levelInfo.appendChild(tutorialLink);
-    levelScreen.appendChild(levelInfo);
+    levelScreen.appendChild(levelInfo); */
 }
 function showTutorialSlide(slideNumber) {
     // Hide all slides
