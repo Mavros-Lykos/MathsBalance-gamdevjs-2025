@@ -93,7 +93,7 @@ function init() {
 } // Wait for the window to fully load
 window.onload = function() {
   // Play the audio when the page loads
-  document.getElementById('start-sound').play();
+  startSound.play();
 };
 
 function addTutorialButtons() {
@@ -114,11 +114,6 @@ function addTutorialButtons() {
         if (!levelScreen.querySelector('.level-info')) {
             const levelInfo = document.createElement('div');
             levelInfo.className = 'level-info mt-3';
-            const tutorialLink = document.createElement('button');
-            tutorialLink.className = 'tutorial-button btn btn-outline-primary btn-sm btn-rounded';
-            tutorialLink.textContent = "View Tutorial";
-            tutorialLink.addEventListener('click', () => showScreen('tutorial-screen'));
-            levelInfo.appendChild(tutorialLink);
             levelScreen.querySelector('.card-footer').prepend(levelInfo);
         }
     }
@@ -288,10 +283,10 @@ function startGame(level) {
             timeLeft = 90;
             break;
         case 'easy':
-            timeLeft = 120;
+            timeLeft = 180;
             break;
         case 'medium':
-            timeLeft = 180;
+            timeLeft = 220;
             break;
         case 'worldHero':
             timeLeft = 240;
@@ -591,8 +586,8 @@ function addBadge(badgeId) {
 function getLevelMaxTime(level) {
     switch (level) {
         case 'beginner': return 90;
-        case 'easy': return 120;
-        case 'medium': return 180;
+        case 'easy': return 180;
+        case 'medium': return 220;
         case 'worldHero': return 240;
         default: return 60;
     }

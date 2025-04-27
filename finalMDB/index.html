@@ -17,31 +17,31 @@
     <div class="container">
         <!-- Tutorial Screen -->
         <div id="tutorial-screen" class="screen card shadow-lg border-0 rounded-lg overflow-hidden">
-            <div class="tutorial-container p-0">
+            <div class="tutorial-container p-0 mt-md-5">
                 <div class="tutorial-header bg-primary text-white p-4 d-flex justify-content-between align-items-center">
                     <h2 class="h3 mb-0">Welcome to Math Balance</h2>
                     <button id="skip-tutorial-btn" class="btn btn-outline-light btn-rounded">Skip Tutorial</button>
                 </div>
 
-                <div class="tutorial-content p-4">
+                <div class="tutorial-content p-0 p-sm-4 ">
                     <!-- Tutorial slides will be displayed here -->
                     <div class="tutorial-slide active" data-slide="1">
                         <div class="tutorial-image text-center mb-4">
                             <i class="fas fa-balance-scale fa-5x text-primary tutorial-icon"></i>
                         </div>
-                        <h3 class="text-center mb-3">Balance in Mathematics</h3>
+                        <h3 class="text-center mb-sm-3">Balance in Mathematics</h3>
                         <div class="card-body bg-light rounded">
                             <p class="lead">Math Balance teaches you how math helps create balance in real-world situations.</p>
                             <p>Just like a scale needs equal weight on both sides, real problems need mathematical balance to be solved correctly.</p>
                         </div>
                     </div>
 
-                    <div class="tutorial-slide" data-slide="2">
-                        <div class="tutorial-image text-center mb-4">
+                    <div class="tutorial-slide  p-0 p-sm-4" data-slide="2">
+                        <div class="tutorial-image text-center mb-1 mb-sm-4">
                             <i class="fas fa-calculator fa-5x text-primary tutorial-icon"></i>
                         </div>
                         <h3 class="text-center mb-3">Real-World Applications</h3>
-                        <div class="card-body bg-light rounded">
+                        <div class="card-body bg-light rounded ">
                             <p class="lead">Discover how math creates balance in everyday situations:</p>
                             <ul class="list-group tutorial-list">
                                 <li class="list-group-item d-flex align-items-center">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
 
-                    <div class="tutorial-slide" data-slide="3">
+                    <div class="tutorial-slide  p-0 p-sm-4" data-slide="3">
                         <div class="tutorial-image text-center mb-4">
                             <i class="fas fa-gamepad fa-5x text-primary tutorial-icon"></i>
                         </div>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
 
-                    <div class="tutorial-slide" data-slide="4">
+                    <div class="tutorial-slide  p-0 p-sm-4" data-slide="4">
                         <div class="tutorial-image text-center mb-4">
                             <i class="fas fa-trophy fa-5x text-primary tutorial-icon"></i>
                         </div>
@@ -118,8 +118,8 @@
                         </div>
                     </div>
 
-                    <div class="tutorial-slide" data-slide="5">
-                        <div class="tutorial-image text-center mb-4">
+                    <div class="tutorial-slide p-0 p-sm-4" data-slide="5">
+                        <div class="tutorial-image text-center mb-sm-4">
                             <i class="fas fa-graduation-cap fa-5x text-primary tutorial-icon"></i>
                         </div>
                         <h3 class="text-center mb-3">Why Balance Matters</h3>
@@ -160,7 +160,7 @@
         </div>
 
         <!-- Home Screen -->
-        <div id="home-screen" class="screen active my-5">
+        <div id="home-screen" class="screen active mt-4 mt-sm-5">
             <div class="card shadow-lg border-0 rounded-lg text-center">
                 <div class="card-header bg-primary text-white p-4">
                     <h1 class="display-4 fw-bold">Math Balance</h1>
@@ -186,10 +186,11 @@
         </div>
 
         <!-- Level Selection Screen -->
-        <div id="level-screen" class="screen">
+        <div id="level-screen" class="screen mt-3 mt-md-5">
             <div class="card shadow-lg border-0 rounded-lg">
                 <div class="card-header bg-primary text-white p-4 text-center">
                     <h2 class="h3 mb-0">Select Difficulty</h2>
+                </div>               
                 </div>
                 <div class="card-body p-4">
                     <div class="row levels-container g-4">
@@ -202,8 +203,8 @@
                                     <h3 class="h5 card-title">Beginner</h3>
                                     <p class="card-text">Simple math problems for newcomers</p>
                                 </div>
-                                <div class="card-footer bg-primary text-white p-0  text-center">
-                                    <small class="align-content-center ">LEVEL 1</small>
+                                <div class="card-footer bg-primary text-white p-0 text-center">
+                                    <small >LEVEL 1</small>
                                 </div>
                             </div>
                         </div>
@@ -260,7 +261,7 @@
         </div>
 
         <!-- Game Screen -->
-        <div id="game-screen" class="screen">
+        <div id="game-screen" class="screen mt-0 mt-lg-5">
             <div class="card shadow-lg border-0 rounded-lg">
                 <div class="card-header bg-primary text-white p-3">
                     <div class="row align-items-between">
@@ -287,13 +288,13 @@
                 </div>
 
                 <div class="card-body p-4">
-                    <div class="problem-container text-center mb-4">
+                    <div class="problem-container text-center mb-2">
                         <div class="mb-3">
                             <!-- <span class="badge bg-info text-dark rounded-pill px-3 py-2 mb-2">Challenge</span> -->
                             <h3 id="problem-text" class="h4 mb-0">Loading problem...</h3>
                         </div>
-                        <div class="problem-image-container mb-4">
-                            <img id="problem-image" src="placeholder.jpg" alt="Problem visualization" class="img-fluid rounded shadow-sm" style="max-height: 400px;">
+                        <div class="problem-image-container mb-2 p-0">
+                            <img id="problem-image" src="images/placeholder-image.jpg" alt="Problem visualization" class="img-fluid rounded shadow-sm" style="max-height: 365px;">
                         </div>
                         <div class="hint-container">
                            
@@ -393,7 +394,7 @@
         </div>
 
         <!-- Scores Screen -->
-        <div id="scores-screen" class="screen">
+        <div id="scores-screen" class="screen mt-5">
             <div class="card shadow-lg border-0 rounded-lg">
                 <div class="card-header bg-primary text-white p-4 text-center">
                     <h2 class="h3 mb-0">Score History</h2>
@@ -431,11 +432,11 @@
     </div>
 
     <!-- Audio elements -->
-    <audio id="correct-sound" src="sounds/correct.mp3"></audio>
-    <audio id="wrong-sound" src="sounds/wrong.wav"></audio>
-    <audio id="level-complete-sound" src="sounds/level-complete.mp3"></audio>
-    <audio id="start-sound" src="sounds/start.wav"></audio>
-    <audio id="start-Game" src="sounds/startGame.wav"></audio>
+    <audio id="correct-sound" src="../sounds/correct.mp3"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+    <audio id="level-complete-sound" src="../sounds/level-complete.mp3"></audio>
+    <audio id="start-sound" src="../sounds/start.wav"></audio>
+    <audio id="start-Game" src="../sounds/startGame.wav"></audio>
 
     
 

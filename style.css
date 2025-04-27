@@ -13,7 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-image: url(math.jpg);
+    background-image: url(images/math.jpg);
 }
 
 .container {
@@ -555,11 +555,11 @@ body {
 }
 
 /* Add a "View Tutorial" button to the level screen */
-.level-info {
+/* .level-info {
     text-align: center;
     margin-top: 20px;
 }
-
+ */
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .tutorial-navigation {
