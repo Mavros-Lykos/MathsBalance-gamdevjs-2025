@@ -94,6 +94,9 @@ The MDB-CDN version and raw version is available but not fully configured yet. l
 
 ```
 maths-balance/
+├── CONTRIBUTING.md         # About contributing guidelines
+├── README.md               # The readme file
+├── index.html              # Raw version entry point
 ├── index.html              # Raw version entry point
 ├── style.css               # Raw version styles
 ├── game.js                 # Raw version game logic
