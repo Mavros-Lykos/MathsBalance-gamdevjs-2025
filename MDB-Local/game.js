@@ -7,7 +7,7 @@ let currentScreen = 'home-screen';
 let currentLevel = '';
 let currentProblems = [];
 let currentProblemIndex = 0;
-let totalProblems = 5;
+let totalProblems = 10;
 let timeLeft = 0;
 let timer = null;
 let score = {
@@ -20,13 +20,14 @@ let usedHintInCurrentProblem = false;
 let usedHints = 0;
 let correctAnswers = 0;
 let earnedBadges = [];
+let gameEnded = false; // prevent double endGame runs
 
 // Audio elements
 const correctSound = document.getElementById('correct-sound');
 const wrongSound = document.getElementById('wrong-sound');
 const levelCompleteSound = document.getElementById('level-complete-sound');
 const startSound = document.getElementById('start-sound');
-const startGameSound = document.getElementById('start-Game');
+const startGameSound = document.getElementById('start-game-sound') || null;
 
 
 // Screen elements
@@ -91,9 +92,9 @@ function init() {
         showTutorialSlide(1);
     }
 } // Wait for the window to fully load
-window.onload = function() {
-  // Play the audio when the page loads
-  startSound.play();
+window.onload = function () {
+    // Play the audio when the page loads
+    startSound?.play?.();
 };
 
 function addTutorialButtons() {
@@ -241,11 +242,11 @@ function showScreen(screenId) {
     currentScreen = screenId;
 
     // Play start sound for game screen
-     if (screenId === 'game-screen') {
-        startGameSound.play();
-    } 
+    if (screenId === 'game-screen') {
+        startGameSound?.play?.();
+    }
     if (screenId === 'home-screen') {
-        startSound.play();
+        startSound?.play?.();
     }
 }
 // Shuffle problems
@@ -258,8 +259,9 @@ function shuffleProblems() {
 
 // Start a new game
 function startGame(level) {
-    startSound.pause();
+    startSound?.pause?.();
 
+    gameEnded = false;
     // Set up game variables based on level
     currentLevel = level;
     currentProblemIndex = 0;
@@ -385,25 +387,29 @@ function checkAnswer() {
     const userAnswer = parseFloat(answerInput.value);
     const currentProblem = currentProblems[currentProblemIndex];
 
-    // Check if the answer is empty or not a number
-    /*  if (answerInput.value.trim() === '' || isNaN(userAnswer)) {
-         showFeedback('Please enter a valid number.', false);
-         return;
-     } */
-    answerInput.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // prevents form or default action
-            checkAnswer(); // this will only progress if correct
-        }
-    });
-
+    /*     // Check if the answer is empty or not a number
+          if (answerInput.value.trim() === '' || isNaN(userAnswer)) {
+             showFeedback('Please enter a valid number.', false);
+             return;
+         } 
+        answerInput.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // prevents form or default action
+                checkAnswer(); // this will only progress if correct
+            }
+        }); */
+    // Validate input (Enter handling already attached once in attachEventListeners)
+    if (answerInput.value.trim() === '' || isNaN(userAnswer)) {
+        showFeedback('Please enter a valid number.', false);
+        return;
+    }
 
     // Check if the answer is correct (with some tolerance for floating point)
     const isCorrect = Math.abs(userAnswer - currentProblem.answer) < 0.01;
 
     if (isCorrect) {
         // Play correct sound
-        correctSound.play();
+        correctSound?.play?.();
 
         // Show feedback
         showFeedback(`Correct! ${currentProblem.explanation}`, true);
@@ -441,7 +447,7 @@ function checkAnswer() {
         }, 1000);
     } else {
         // Play wrong sound
-        wrongSound.play();
+        wrongSound?.play?.();
 
         // Show feedback
         showFeedback('Not quite right. Try again!', false);
@@ -469,8 +475,10 @@ function showTimesUpFeedback() {
 
 // End the game
 function endGame() {
+    if (gameEnded) return; // avoid double-run (timer + completion)
+    gameEnded = true;
     stopTimer();
-    levelCompleteSound.play();
+    levelCompleteSound?.play?.();
 
     // Calculate final score
     calculateFinalScore();
@@ -550,7 +558,7 @@ function updateResultsScreen() {
     completedLevel.textContent = levelName;
 
     // Update problems solved
-    problemsSolved.textContent = `${totalProblems}/${totalProblems}`;
+    problemsSolved.textContent = `${correctAnswers}/${currentProblems.length}`;
 
     // Update score breakdown
     baseScore.textContent = score.base;
