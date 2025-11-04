@@ -94,6 +94,12 @@ function init() {
 } // Wait for the window to fully load
 window.onload = function () {
     // Play the audio when the page loads
+    const startSound = new Audio('start.mp3');
+
+    document.addEventListener('click', () => {
+        startSound.play().catch(e => console.log(e));
+    }, { once: true });
+
     startSound?.play?.();
 };
 
