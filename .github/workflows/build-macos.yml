@@ -35,5 +35,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-macOS
-          path: dist/neutralino/MathsBalance.dmg
+          path: dist/
           retention-days: 30

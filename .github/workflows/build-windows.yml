@@ -31,11 +31,12 @@ jobs:
         run: neu build --release
 
       - name: List dist folder contents
-        run: ls -R dist
+        run: Get-ChildItem -Recurse dist | Select-Object FullName
+        shell: pwsh
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-Windows
-          path: dist/neutralino/MathsBalance.exe
+          path: dist/
           retention-days: 30

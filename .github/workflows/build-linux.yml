@@ -43,5 +43,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-Linux
-          path: dist/neutralino/MathsBalance.AppImage
+          path: dist/
           retention-days: 30
