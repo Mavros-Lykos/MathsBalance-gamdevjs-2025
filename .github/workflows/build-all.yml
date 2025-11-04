@@ -25,8 +25,29 @@ jobs:
       - name: Install Neutralino CLI
         run: npm install -g @neutralinojs/neu
 
+      - name: Verify Neutralino installation
+        run: neu version
+
+      - name: List project files
+        run: Get-ChildItem -Recurse | Select-Object FullName
+        shell: pwsh
+
       - name: Build Windows app
-        run: neu build --release
+        run: |
+          neu build --release
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Build failed with exit code $LASTEXITCODE"
+            exit $LASTEXITCODE
+          }
+        shell: pwsh
+
+      - name: Verify dist folder exists
+        run: |
+          if (-Not (Test-Path "dist")) {
+            Write-Error "dist folder was not created!"
+            exit 1
+          }
+        shell: pwsh
 
       - name: List dist folder contents
         run: Get-ChildItem -Recurse dist | Select-Object FullName
@@ -36,8 +57,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-windows
-          path: dist/
+          path: dist/**/*
           retention-days: 5
+          if-no-files-found: error
 
   build-macos:
     runs-on: macos-latest
@@ -55,8 +77,26 @@ jobs:
       - name: Install Neutralino CLI
         run: npm install -g @neutralinojs/neu
 
+      - name: Verify Neutralino installation
+        run: neu version
+
+      - name: List project files
+        run: ls -la
+
       - name: Build macOS app
-        run: neu build --release
+        run: |
+          neu build --release
+          if [ $? -ne 0 ]; then
+            echo "Build failed with exit code $?"
+            exit 1
+          fi
+
+      - name: Verify dist folder exists
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "dist folder was not created!"
+            exit 1
+          fi
 
       - name: List dist folder contents
         run: ls -R dist
@@ -65,8 +105,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-macos
-          path: dist/
+          path: dist/**/*
           retention-days: 5
+          if-no-files-found: error
 
   build-linux:
     runs-on: ubuntu-latest
@@ -92,8 +133,26 @@ jobs:
       - name: Install Neutralino CLI
         run: npm install -g @neutralinojs/neu
 
+      - name: Verify Neutralino installation
+        run: neu version
+
+      - name: List project files
+        run: ls -la
+
       - name: Build Linux app
-        run: neu build --release
+        run: |
+          neu build --release
+          if [ $? -ne 0 ]; then
+            echo "Build failed with exit code $?"
+            exit 1
+          fi
+
+      - name: Verify dist folder exists
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "dist folder was not created!"
+            exit 1
+          fi
 
       - name: List dist folder contents
         run: ls -R dist
@@ -102,8 +161,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-linux
-          path: dist/
+          path: dist/**/*
           retention-days: 5
+          if-no-files-found: error
 
   create-release:
     needs: [build-windows, build-macos, build-linux]
@@ -114,13 +174,16 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
 
+      - name: List downloaded artifacts
+        run: ls -R
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            MathsBalance-windows/*
-            MathsBalance-macos/*
-            MathsBalance-linux/*
+            MathsBalance-windows/**/*
+            MathsBalance-macos/**/*
+            MathsBalance-linux/**/*
           draft: false
           prerelease: false
           body: |
