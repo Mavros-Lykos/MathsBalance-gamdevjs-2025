@@ -17,37 +17,14 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Clean dist folder
-        run: |
-          if (Test-Path "dist") { Remove-Item "dist" -Recurse -Force }
-        shell: pwsh
-
       - name: Install Neutralino CLI
         run: npm install -g @neutralinojs/neu
 
-      - name: Verify Neutralino installation
-        run: neu version
-
-      - name: List project files
-        run: Get-ChildItem -Recurse | Select-Object FullName
-        shell: pwsh
+      - name: Update Neutralino binaries and client
+        run: neu update
 
       - name: Build Windows app
-        run: |
-          neu build --release
-          if ($LASTEXITCODE -ne 0) {
-            Write-Error "Build failed with exit code $LASTEXITCODE"
-            exit $LASTEXITCODE
-          }
-        shell: pwsh
-
-      - name: Verify dist folder exists
-        run: |
-          if (-Not (Test-Path "dist")) {
-            Write-Error "dist folder was not created!"
-            exit 1
-          }
-        shell: pwsh
+        run: neu build --release
 
       - name: List dist folder contents
         run: Get-ChildItem -Recurse dist | Select-Object FullName
@@ -71,32 +48,14 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Clean dist folder
-        run: rm -rf dist
-
       - name: Install Neutralino CLI
         run: npm install -g @neutralinojs/neu
 
-      - name: Verify Neutralino installation
-        run: neu version
-
-      - name: List project files
-        run: ls -la
+      - name: Update Neutralino binaries and client
+        run: neu update
 
       - name: Build macOS app
-        run: |
-          neu build --release
-          if [ $? -ne 0 ]; then
-            echo "Build failed with exit code $?"
-            exit 1
-          fi
-
-      - name: Verify dist folder exists
-        run: |
-          if [ ! -d "dist" ]; then
-            echo "dist folder was not created!"
-            exit 1
-          fi
+        run: neu build --release
 
       - name: List dist folder contents
         run: ls -R dist
@@ -122,37 +81,16 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y software-properties-common
-          sudo add-apt-repository universe
-          sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev || true
-
-      - name: Clean dist folder
-        run: rm -rf dist
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev
 
       - name: Install Neutralino CLI
         run: npm install -g @neutralinojs/neu
 
-      - name: Verify Neutralino installation
-        run: neu version
-
-      - name: List project files
-        run: ls -la
+      - name: Update Neutralino binaries and client
+        run: neu update
 
       - name: Build Linux app
-        run: |
-          neu build --release
-          if [ $? -ne 0 ]; then
-            echo "Build failed with exit code $?"
-            exit 1
-          fi
-
-      - name: Verify dist folder exists
-        run: |
-          if [ ! -d "dist" ]; then
-            echo "dist folder was not created!"
-            exit 1
-          fi
+        run: neu build --release
 
       - name: List dist folder contents
         run: ls -R dist
@@ -192,8 +130,8 @@ jobs:
             Available for Windows, macOS, and Linux!
             
             ## Downloads
-            - **Windows**: MathsBalance-${{ github.ref_name }}-windows.exe
-            - **macOS**: MathsBalance-${{ github.ref_name }}-macos.dmg
-            - **Linux**: MathsBalance-${{ github.ref_name }}-linux.AppImage
+            - **Windows**: Download the Windows executable
+            - **macOS**: Download the macOS application
+            - **Linux**: Download the Linux AppImage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
