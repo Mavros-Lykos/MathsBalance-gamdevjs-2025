@@ -39,7 +39,7 @@ jobs:
         run: neu build --release --output-format exe
 
       - name: Upload Windows artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-windows
           path: dist/MathsBalance/*.exe
@@ -78,7 +78,7 @@ jobs:
         run: neu build --release --output-format dmg
 
       - name: Upload macOS artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-macos
           path: dist/MathsBalance/*.dmg
@@ -122,7 +122,7 @@ jobs:
         run: neu build --release --output-format appimage
 
       - name: Upload Linux artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-linux
           path: dist/MathsBalance/*.AppImage
@@ -135,7 +135,7 @@ jobs:
 
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
 
       - name: Create Release
         uses: softprops/action-gh-release@v1

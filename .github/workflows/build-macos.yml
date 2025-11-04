@@ -26,7 +26,7 @@ jobs:
         run: neu build --release --output-format dmg
       
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-macOS
           path: dist/MathsBalance/MathsBalance.dmg
