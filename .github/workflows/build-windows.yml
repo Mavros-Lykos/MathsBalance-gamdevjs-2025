@@ -13,18 +13,21 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-      
+
+      - name: Clean dist folder
+        run: if exist dist rmdir /s /q dist
+
       - name: Install Neutralino CLI
         run: npm install -g @neutralinojs/neutralino-cli
-      
+
       - name: Build for Windows
         run: neu build --release --output-format exe
-      
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
