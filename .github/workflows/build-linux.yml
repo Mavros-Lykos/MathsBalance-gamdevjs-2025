@@ -35,10 +35,13 @@ jobs:
       
       - name: Build for Linux
         run: neu build --release
-      
+
+      - name: List dist folder contents
+        run: ls -R dist
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-Linux
-          path: dist/MathsBalance/MathsBalance.AppImage
+          path: dist/neutralino/MathsBalance.AppImage
           retention-days: 30
