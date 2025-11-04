@@ -12,21 +12,24 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
       
+      - name: Clean dist folder
+        run: rm -rf dist
+      
       - name: Install Neutralino CLI
-        run: npm install -g @neutralinojs/neutralino-cli
+        run: npm install -g @neutralinojs/neu
       
       - name: Build for macOS
-        run: neu build --release --output-format dmg
+        run: neu build --release
       
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-macOS
           path: dist/MathsBalance/MathsBalance.dmg
