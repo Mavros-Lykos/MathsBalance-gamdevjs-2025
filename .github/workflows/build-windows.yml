@@ -1,0 +1,33 @@
+name: Build Windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - 'resources/**'
+      - 'neutralino.config.json'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install Neutralino CLI
+        run: npm install -g @neutralinojs/neutralino-cli
+      
+      - name: Build for Windows
+        run: neu build --release --output-format exe
+      
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MathsBalance-Windows
+          path: dist/MathsBalance/MathsBalance.exe
+          retention-days: 30

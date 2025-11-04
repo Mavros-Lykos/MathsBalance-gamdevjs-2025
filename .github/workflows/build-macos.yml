@@ -1,0 +1,33 @@
+name: Build macOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - 'resources/**'
+      - 'neutralino.config.json'
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install Neutralino CLI
+        run: npm install -g @neutralinojs/neutralino-cli
+      
+      - name: Build for macOS
+        run: neu build --release --output-format dmg
+      
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MathsBalance-macOS
+          path: dist/MathsBalance/MathsBalance.dmg
+          retention-days: 30
