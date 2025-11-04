@@ -30,9 +30,12 @@ jobs:
       - name: Build for Windows
         run: neu build --release
 
+      - name: List dist folder contents
+        run: ls -R dist
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-Windows
-          path: dist/MathsBalance/MathsBalance.exe
+          path: dist/neutralino/MathsBalance.exe
           retention-days: 30

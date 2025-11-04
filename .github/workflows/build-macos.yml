@@ -27,10 +27,13 @@ jobs:
       
       - name: Build for macOS
         run: neu build --release
-      
+
+      - name: List dist folder contents
+        run: ls -R dist
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-macOS
-          path: dist/MathsBalance/MathsBalance.dmg
+          path: dist/neutralino/MathsBalance.dmg
           retention-days: 30

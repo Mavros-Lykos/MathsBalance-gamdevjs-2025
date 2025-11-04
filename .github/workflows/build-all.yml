@@ -28,11 +28,14 @@ jobs:
       - name: Build Windows app
         run: neu build --release
 
+      - name: List dist folder contents
+        run: ls -R dist
+
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-windows
-          path: dist/MathsBalance/*.exe
+          path: dist/neutralino/MathsBalance.exe
           retention-days: 5
 
   build-macos:
@@ -54,11 +57,14 @@ jobs:
       - name: Build macOS app
         run: neu build --release
 
+      - name: List dist folder contents
+        run: ls -R dist
+
       - name: Upload macOS artifact
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-macos
-          path: dist/MathsBalance/*.dmg
+          path: dist/neutralino/MathsBalance.dmg
           retention-days: 5
 
   build-linux:
@@ -88,11 +94,14 @@ jobs:
       - name: Build Linux app
         run: neu build --release
 
+      - name: List dist folder contents
+        run: ls -R dist
+
       - name: Upload Linux artifact
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-linux
-          path: dist/MathsBalance/*.AppImage
+          path: dist/neutralino/MathsBalance.AppImage
           retention-days: 5
 
   create-release:
