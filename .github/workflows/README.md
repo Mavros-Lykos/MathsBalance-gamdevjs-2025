@@ -47,20 +47,11 @@ This project includes automated GitHub Actions workflows to build OS-specific Ne
 
 ## Build Outputs
 
-### Windows
-- Output: `MathsBalance-v1.0.0-windows.exe`
-- Format: Executable installer
-- Platform: Windows x64
+### Artifact naming and locations
 
-### macOS
-- Output: `MathsBalance-v1.0.0-macos.dmg`
-- Format: Disk Image
-- Platform: Intel & Apple Silicon (universal)
+The workflows upload the entire `dist/` folder as an artifact. Neutralino by default outputs the packaged binaries under `dist/` (often in a `neutralino` subfolder) and the produced files are generally named `neutralino.exe`, `neutralino.dmg` or `neutralino.AppImage` depending on the target platform.
 
-### Linux
-- Output: `MathsBalance-v1.0.0-linux.AppImage`
-- Format: AppImage (portable)
-- Platform: Linux x64
+When you download the workflow artifact from the Actions run, you will get a zip that contains the `dist/` structure produced by Neutralino. The workflows in this repository are configured to upload the full `dist/**/*` contents so you can find the platform-specific package inside that artifact.
 
 ## Prerequisites
 
