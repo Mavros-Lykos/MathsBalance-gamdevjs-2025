@@ -27,6 +27,9 @@ jobs:
       - name: Install Neutralino CLI
         run: npm install -g @neutralinojs/neu
 
+      - name: Update Neutralino binaries and client
+        run: neu update
+
       - name: Build for Windows
         run: neu build --release
 
@@ -38,5 +41,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: MathsBalance-Windows
-          path: dist/
+          path: dist/**/*
           retention-days: 30
+          if-no-files-found: error
