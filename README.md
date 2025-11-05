@@ -60,6 +60,17 @@ git clone https://github.com/Mavros-Lykos/MathsBalance-gamdevjs-2025.git
 cd MathsBalance-gamdevjs-2025
 ```
 
+## Continuous Integration (CI) builds and artifacts
+
+This project includes GitHub Actions workflows that can build desktop apps using Neutralino for Windows, macOS and Linux. Build artifacts (executables, DMG, AppImage) are uploaded to the workflow run as downloadable artifacts under the **Actions** tab. For release builds we also attach artifacts to GitHub Releases.
+
+How to get CI artifacts:
+
+1. Go to the repository on GitHub
+2. Open the **Actions** tab and select a workflow run
+3. Under the run summary, expand **Artifacts** and download the ZIP containing `dist/` with the built packages
+
+
 ### Option 2: Download ZIP
 
 1. Visit the [repository page](https://github.com/yourusername/maths-balance)
