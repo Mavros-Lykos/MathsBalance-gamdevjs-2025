@@ -60,15 +60,49 @@ git clone https://github.com/Mavros-Lykos/MathsBalance-gamdevjs-2025.git
 cd MathsBalance-gamdevjs-2025
 ```
 
-## Continuous Integration (CI) builds and artifacts
+## 💾 Downloads & Releases
 
-This project includes GitHub Actions workflows that can build desktop apps using Neutralino for Windows, macOS and Linux. Build artifacts (executables, DMG, AppImage) are uploaded to the workflow run as downloadable artifacts under the **Actions** tab. For release builds we also attach artifacts to GitHub Releases.
+### Official Releases
 
-How to get CI artifacts:
+Download the latest version from the [Releases page](https://github.com/Mavros-Lykos/MathsBalance-gamdevjs-2025/releases).
 
-1. Go to the repository on GitHub
-2. Open the **Actions** tab and select a workflow run
-3. Under the run summary, expand **Artifacts** and download the ZIP containing `dist/` with the built packages
+Each release includes ready-to-run packages for all platforms:
+
+- 🖥️ **Windows**: `MathsBalance-windows.zip` - Contains `MathsBalance.exe` + `resources.neu`
+- 🍏 **macOS**: `MathsBalance-macos.zip` - Contains `MathsBalance` (Universal binary) + `resources.neu`
+- 🐧 **Linux**: `MathsBalance-linux.zip` - Contains binaries for x64, ARM64, and ARMhf + `resources.neu`
+
+### ⚠️ Important: Package Structure
+
+Each ZIP contains:
+```
+MathsBalance-[platform].zip
+│
+├── MathsBalance[.exe]    ← Main executable
+└── resources.neu         ← All game assets and code
+```
+
+**Keep the executable and `resources.neu` together in the same folder!** The game won't run if they're separated.
+
+### Running the Downloaded Game
+
+1. Download the ZIP for your platform from [Releases](https://github.com/Mavros-Lykos/MathsBalance-gamdevjs-2025/releases)
+2. Extract the ZIP file
+3. Run the executable:
+   - **Windows**: Double-click `MathsBalance.exe`
+   - **macOS**: Double-click `MathsBalance` (you may need to allow it in System Preferences → Security)
+   - **Linux**: Run `./MathsBalance-x64` (or the appropriate binary for your architecture)
+
+### Continuous Integration Builds
+
+This project uses GitHub Actions to automatically build desktop apps using NeutralinoJS for Windows, macOS, and Linux.
+
+**Getting CI Artifacts:**
+
+1. Go to the [Actions tab](https://github.com/Mavros-Lykos/MathsBalance-gamdevjs-2025/actions)
+2. Select a completed workflow run
+3. Download artifacts from the run summary
+4. Each artifact contains the packaged game ready to run
 
 
 ### Option 2: Download ZIP
@@ -188,6 +222,20 @@ const beginnerProblems = [
 ## Contributing
 
 We welcome contributions to Maths Balance! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to the project.
+
+### Contributors
+
+Special thanks to all external contributors who have helped make MathsBalance better:
+
+<p align="center">
+  <!-- Add external contributors below in this format: -->
+  <!-- <a href="https://github.com/shasha628" title="Shakya">
+    <img src="https://avatars.githubusercontent.com/u/188103919?v=4" width="48" height="48" alt="username"/>
+  </a> -->
+  <!-- Contributors will be added here as they contribute to the project -->
+</p>
+
+*contribute to the project and you'll be added in the next release!*
 
 
 ## License
