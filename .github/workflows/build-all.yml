@@ -7,69 +7,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install Neutralino CLI
-        run: npm install -g @neutralinojs/neu
-
-      - name: Update Neutralino binaries and client
-        run: neu update
-
-      - name: Build Windows app
-        run: neu build --release
-
-      - name: List dist folder contents
-        run: Get-ChildItem -Recurse dist | Select-Object FullName
-        shell: pwsh
-
-      - name: Upload Windows artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: MathsBalance-windows
-          path: dist/**/*
-          retention-days: 5
-          if-no-files-found: error
-
-  build-macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install Neutralino CLI
-        run: npm install -g @neutralinojs/neu
-
-      - name: Update Neutralino binaries and client
-        run: neu update
-
-      - name: Build macOS app
-        run: neu build --release
-
-      - name: List dist folder contents
-        run: ls -R dist
-
-      - name: Upload macOS artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: MathsBalance-macos
-          path: dist/**/*
-          retention-days: 5
-          if-no-files-found: error
-
-  build-linux:
+  build:
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v4
 
@@ -78,60 +18,67 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev
-
       - name: Install Neutralino CLI
         run: npm install -g @neutralinojs/neu
 
       - name: Update Neutralino binaries and client
         run: neu update
 
-      - name: Build Linux app
+      - name: Build for all platforms
         run: neu build --release
 
-      - name: List dist folder contents
-        run: ls -R dist
+      - name: List build output
+        run: ls -lh .tmp/
 
-      - name: Upload Linux artifact
+      - name: Create platform-specific packages
+        run: |
+          mkdir -p packages/windows packages/linux packages/macos
+          
+          # Windows package
+          cp .tmp/neutralino-win_x64.exe packages/windows/MathsBalance.exe
+          cp .tmp/resources.neu packages/windows/
+          cd packages/windows && zip -r ../../MathsBalance-windows.zip . && cd ../..
+          
+          # Linux package (all architectures)
+          cp .tmp/neutralino-linux_x64 packages/linux/MathsBalance-x64
+          cp .tmp/neutralino-linux_arm64 packages/linux/MathsBalance-arm64
+          cp .tmp/neutralino-linux_armhf packages/linux/MathsBalance-armhf
+          chmod +x packages/linux/MathsBalance-*
+          cp .tmp/resources.neu packages/linux/
+          cd packages/linux && zip -r ../../MathsBalance-linux.zip . && cd ../..
+          
+          # macOS Universal package
+          cp .tmp/neutralino-mac_universal packages/macos/MathsBalance
+          chmod +x packages/macos/MathsBalance
+          cp .tmp/resources.neu packages/macos/
+          cd packages/macos && zip -r ../../MathsBalance-macos.zip . && cd ../..
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: MathsBalance-linux
-          path: dist/**/*
+          name: MathsBalance-all-platforms
+          path: '*.zip'
           retention-days: 5
           if-no-files-found: error
 
   create-release:
-    needs: [build-windows, build-macos, build-linux]
+    needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
 
     steps:
-      - name: Download all artifacts
+      - name: Download artifacts
         uses: actions/download-artifact@v4
-
-      - name: List downloaded artifacts
-        run: ls -R
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            MathsBalance-windows/**/*
-            MathsBalance-macos/**/*
-            MathsBalance-linux/**/*
-          draft: false
-          prerelease: false
+          files: MathsBalance-all-platforms/*.zip
           body: |
             # MathsBalance ${{ github.ref_name }}
             
-            Available for Windows, macOS, and Linux!
-            
-            ## Downloads
-            - **Windows**: Download the Windows executable
-            - **macOS**: Download the macOS application
-            - **Linux**: Download the Linux AppImage
+            **Windows**: Extract `MathsBalance-windows.zip` and run `MathsBalance.exe`
+            **Linux**: Extract `MathsBalance-linux.zip` and run the binary for your architecture
+            **macOS**: Extract `MathsBalance-macos.zip` and run `MathsBalance`
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
