@@ -231,7 +231,7 @@ Special thanks to all external contributors who have helped make MathsBalance be
   <!-- Add external contributors below in this format: -->
  <a href="https://github.com/shasha628" title="Shakya">
     <img src="https://avatars.githubusercontent.com/u/188103919?v=4" width="60" height="60" alt="shasha628"/>
-  </a>[@shasha628](https://github.com/shasha628)
+  </a>
   <!-- Contributors will be added here as they contribute to the project -->
 </p>
 
