@@ -27,9 +27,6 @@ jobs:
       - name: Build for all platforms
         run: neu build --release
 
-      - name: List build output
-        run: ls -lh .tmp/
-
       - name: Create platform-specific packages
         run: |
           mkdir -p packages/windows packages/linux packages/macos
@@ -39,11 +36,9 @@ jobs:
           cp .tmp/resources.neu packages/windows/
           cd packages/windows && zip -r ../../MathsBalance-windows.zip . && cd ../..
           
-          # Linux package (all architectures)
-          cp .tmp/neutralino-linux_x64 packages/linux/MathsBalance-x64
-          cp .tmp/neutralino-linux_arm64 packages/linux/MathsBalance-arm64
-          cp .tmp/neutralino-linux_armhf packages/linux/MathsBalance-armhf
-          chmod +x packages/linux/MathsBalance-*
+          # Linux package
+          cp .tmp/neutralino-linux_x64 packages/linux/MathsBalance
+          chmod +x packages/linux/MathsBalance
           cp .tmp/resources.neu packages/linux/
           cd packages/linux && zip -r ../../MathsBalance-linux.zip . && cd ../..
           
@@ -52,6 +47,9 @@ jobs:
           chmod +x packages/macos/MathsBalance
           cp .tmp/resources.neu packages/macos/
           cd packages/macos && zip -r ../../MathsBalance-macos.zip . && cd ../..
+
+      - name: List created packages
+        run: ls -lh *.zip
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -77,8 +75,12 @@ jobs:
           body: |
             # MathsBalance ${{ github.ref_name }}
             
-            **Windows**: Extract `MathsBalance-windows.zip` and run `MathsBalance.exe`
-            **Linux**: Extract `MathsBalance-linux.zip` and run the binary for your architecture
-            **macOS**: Extract `MathsBalance-macos.zip` and run `MathsBalance`
+            Download the version for your operating system:
+            
+            - **Windows**: `MathsBalance-windows.zip` - Extract and run `MathsBalance.exe`
+            - **Linux**: `MathsBalance-linux.zip` - Extract and run `./MathsBalance`
+            - **macOS**: `MathsBalance-macos.zip` - Extract and run `./MathsBalance`
+            
+            Each package contains the executable and resources needed to run.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
